@@ -15,88 +15,62 @@ import ch.halcyon.bbcradioone.model.Show;
  * Created by yannick on 09/02/15.
  */
 public class DataService {
-    NowPlaying np = null;
-    Image image = null;
-    Show showy = null;
+    private NowPlaying nowPlaying = null;
+    private Image image = null;
+    private Show show = null;
 
     DataService() {
-
     }
 
 
     public NowPlaying getNowPlaying() {
-
-        Log.d("bbc", "starting getting");
-
         BbcRadioOneRestClient.getNowPlaying(new TextHttpResponseHandler() {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Log.e("bbc", "error");
+                Log.e(MainActivity.LOGGING_TAG, "error while getting the 'now playing' data: " + throwable.getMessage());
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                Log.d("bbc", responseString);
-
-                Gson gson = new Gson();
-                np = gson.fromJson(responseString, NowPlaying.class);
-
+                nowPlaying = new Gson().fromJson(responseString, NowPlaying.class);
             }
         });
 
-        return np;
-
+        return nowPlaying;
     }
 
     public String getNowPlayingImageUrl(String id) {
-
-        Log.d("bbc", "starting getting image");
-
         BbcRadioOneRestClient.getNowPlayingImg(id, new TextHttpResponseHandler() {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Log.e("bbc", "error");
+                Log.e(MainActivity.LOGGING_TAG, "error while getting the 'now playing cover': " + throwable.getMessage());
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                Log.d("bbc", responseString);
-
-                Gson gson = new Gson();
-                image = gson.fromJson(responseString, Image.class);
-
+                image = new Gson().fromJson(responseString, Image.class);
             }
         });
 
         return image.getImageUrl();
-
     }
 
     public Show getCurrentShow() {
-
-        Log.d("bbc", "starting getting current show");
-
         BbcRadioOneRestClient.getCurrentShow(new TextHttpResponseHandler() {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Log.e("bbc", "error");
+                Log.e(MainActivity.LOGGING_TAG, "error while getting the 'current show' data: " + throwable.getMessage());
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                Log.d("bbc", responseString);
-                String s = responseString.substring(9, responseString.length() - 1);
-                Log.d("bbc", s);
-                Gson gson = new Gson();
-                showy = gson.fromJson(s, Show.class);
-
+                show = new Gson().fromJson(responseString.substring(9, responseString.length() - 1), Show.class);
             }
         });
 
-        return showy;
-
+        return show;
     }
 }

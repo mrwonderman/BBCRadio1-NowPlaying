@@ -9,19 +9,18 @@ import android.widget.TextView;
 
 import com.koushikdutta.ion.Ion;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import ch.halcyon.bbcradioone.model.NowPlaying;
+import ch.halcyon.bbcradioone.model.Realtime;
 import ch.halcyon.bbcradioone.model.Show;
 
 
 public class MainActivity extends ActionBarActivity {
 
-    TextView songTitle, songArtist, /*untilFinished,*/
+    public static String LOGGING_TAG = "BBCRadioNP";
+
+    private TextView songTitle, songArtist,
             currentShow;
-    DataService dataService;
-    ImageView imageView;
+    private DataService dataService;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,21 +45,18 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void resetInfo() {
-        NowPlaying nowPlaying = dataService.getNowPlaying();
+        Realtime realtime = dataService.getNowPlaying().getRealtime();
 
-        String text = "<b>Artist:</b>   " + nowPlaying.getRealtime().getArtist();
-        songArtist.setText(Html.fromHtml(text));
+        String artist_text = "<b>Artist:</b>   " + realtime.getArtist();
+        songArtist.setText(Html.fromHtml(artist_text));
 
-        String text_song = "<b>Song:</b>   " + nowPlaying.getRealtime().getTitle();
-        songTitle.setText(Html.fromHtml(text_song));
+        String song_text = "<b>Song:</b>   " + realtime.getTitle();
+        songTitle.setText(Html.fromHtml(song_text));
 
         Ion.with(imageView)
                 .placeholder(R.drawable.ic_launcher)
                 .error(R.drawable.ic_launcher)
-                .load(dataService.getNowPlayingImageUrl(nowPlaying.getRealtime().getRecord_id()));
-
-        Date date = new Date(nowPlaying.getRealtime().getEnd().longValue() * 1000);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+                .load(dataService.getNowPlayingImageUrl(realtime.getRecord_id()));
 
         Show show = dataService.getCurrentShow();
         String text_show = "<b>" + show.getResults().get340()[1].getName() + "</b><br/>" + show.getResults().get340()[1].getDescription();

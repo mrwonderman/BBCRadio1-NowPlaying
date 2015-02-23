@@ -1,7 +1,5 @@
 package ch.halcyon.bbcradioone.model;
 
-import com.google.gson.annotations.SerializedName;
-
 /**
  * Created by yannick on 10/02/15.
  */

@@ -2,9 +2,6 @@ package ch.halcyon.bbcradioone;
 
 import android.os.StrictMode;
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.SyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
 
@@ -14,9 +11,9 @@ import com.loopj.android.http.TextHttpResponseHandler;
 public class BbcRadioOneRestClient {
     private static boolean isInitialized = false;
 
-    public static final String NOW_PLAYING_URL = "http://polling.bbc.co.uk/radio/realtime/bbc_radio_one.json";
-    public static final String NOW_PLAYING_IMG_URL = "http://www.bbc.co.uk/radio/player/trackimage/";
-    public static final String CURRENT_SHOW_URL = "http://np.radioplayer.co.uk/qp/v3/onair?rpIds=340";
+    private static final String NOW_PLAYING_URL = "http://polling.bbc.co.uk/radio/realtime/bbc_radio_one.json";
+    private static final String NOW_PLAYING_IMG_URL = "http://www.bbc.co.uk/radio/player/trackimage/";
+    private static final String CURRENT_SHOW_URL = "http://np.radioplayer.co.uk/qp/v3/onair?rpIds=340";
 
 
     private static SyncHttpClient client = new SyncHttpClient();

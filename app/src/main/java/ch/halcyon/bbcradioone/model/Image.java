@@ -1,8 +1,6 @@
 
 package ch.halcyon.bbcradioone.model;
 
-import java.util.List;
-
 public class Image{
    	private String imageUrl;
 

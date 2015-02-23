@@ -30,7 +30,6 @@ public class NowPlayingWidgetProvider extends AppWidgetProvider {
         super.onReceive(context, intent);
 
         if (intent.getAction().equals(ACTION_AUTO_UPDATE)) {
-
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
             ComponentName thisAppWidget = new ComponentName(context.getPackageName(), NowPlayingWidgetProvider.class.getName());
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidget);
@@ -96,7 +95,7 @@ public class NowPlayingWidgetProvider extends AppWidgetProvider {
             bis.close();
             is.close();
         } catch (IOException e) {
-            Log.e("huhu", "Error getting bitmap", e);
+            Log.e(MainActivity.LOGGING_TAG, "Error getting bitmap", e);
         }
         return bm;
     }

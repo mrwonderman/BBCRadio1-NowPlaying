@@ -1,8 +1,6 @@
 
 package ch.halcyon.bbcradioone.model;
 
-import java.util.List;
-
 public class Realtime{
    	private String artist;
    	private String brand_pid;
