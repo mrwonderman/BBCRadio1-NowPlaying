@@ -1,5 +1,6 @@
 package ch.halcyon.bbcradioone;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
@@ -13,7 +14,7 @@ import ch.halcyon.bbcradioone.model.Realtime;
 import ch.halcyon.bbcradioone.model.Show;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
     public static String LOGGING_TAG = "BBCRadioNP";
 
